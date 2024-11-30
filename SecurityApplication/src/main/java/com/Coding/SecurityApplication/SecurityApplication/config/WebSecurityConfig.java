@@ -42,14 +42,15 @@ public class WebSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         return httpSecurity.authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/signup","/login","/refreshToken","/home.html").permitAll()
+                        //auth.requestMatchers("/signup","/login","/refreshToken","/home.html").permitAll()
 
 //                                .requestMatchers("/product").hasRole(ADMIN.name())
-                                .anyRequest().authenticated())
+//                                .anyRequest().authenticated())
+                        auth.anyRequest().permitAll())
                 .csrf(AbstractHttpConfigurer::disable)
 
                 .sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                //.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
 //                .oauth2Login(loigConfig -> loigConfig.failureUrl("/login?error=true")
 //                        .successHandler(oauth2SuccessHandler))
 //                .formLogin(Customizer.withDefaults())
